@@ -1,0 +1,14 @@
+[
+  {
+    "name": "form",
+    "path": "/form",
+    "component": "C:\\\\Users\\\\milez\\\\OneDrive\\\\เดสก์ท็อป\\\\timesheetv2\\\\bitvugit\\\\profilegoogle\\\\pages\\\\form.vue",
+    "chunkName": "pages/form"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\milez\\\\OneDrive\\\\เดสก์ท็อป\\\\timesheetv2\\\\bitvugit\\\\profilegoogle\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]

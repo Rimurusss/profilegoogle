@@ -1,7 +1,8 @@
 <template>
   <h1>
     Email: {{ data.emailUser }}<br />
-    profile: {{ data.profileUser }}
+    profile: 
+    <img :src="data.profileUrl">
   </h1>
 </template>
 
@@ -26,17 +27,27 @@ export default defineComponent({
 
     const data = reactive({
       emailUser: '',
-      profileUser:''
+      profileUrl:''
     })
 
     // const project = ref<any[]>([])
     // const selectedProject = ref<any[]>([])
     // const checkBoxData = ref<any[]>([])
 
-    useGoogleAccount({
-      onResult: (response: any) => {
-        console.log('Profile API response: ', response.data.profile)
-        data.emailUser = response.data.email
+    // useGoogleAccount({
+    //   onResult: (response: any) => {
+    //     console.log('Profile API response: ', response.data)
+    //     console.log('email API response: ', response.data.email)
+    //     console.log('Profilee API response: ', response.data.profileUser)
+    //     data.emailUser = response.data.email
+    //   }
+    // })
+     useGoogleAccount({
+      onResult: (result: any) => {
+        // TODO Mile do this api
+        console.log('Profile API data: ', result)
+        data.emailUser = result.emailAddresses[0].value
+        data.profileUrl = result.photos[0].url
       }
     })
     return {

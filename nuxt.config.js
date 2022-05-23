@@ -55,9 +55,10 @@ export default {
         },
         clientId: process.env.GOOGLE_APP_ID,
         scope: [
-          'profile',
           'email',
-          'https://www.googleapis.com/auth/spreadsheets'
+          'https://www.googleapis.com/auth/spreadsheets',
+          'https://www.googleapis.com/auth/userinfo.email',
+          'https://www.googleapis.com/auth/userinfo.profile'
         ],
         codeChallengeMethod: '',
         responseType: 'id_token token',

@@ -1,5 +1,6 @@
 import { onBeforeMount, useContext, useRouter } from '@nuxtjs/composition-api'
 import qs from 'qs'
+const API_KEY = process.env.GOOGLE_API_KEY
 
 const useGoogleAccount = ({
   onResult
@@ -9,18 +10,29 @@ const useGoogleAccount = ({
   const { hash } = $auth.ctx.route
   const query = hash.replace('#', '')
   const qsObject = qs.parse(query)
-  const ID_TOKEN = qsObject.id_token
+  // const ID_TOKEN = qsObject.id_token
+  const accessToken = qsObject.access_token
 
   onBeforeMount(async () => {
     try {
-      const response = await $axios
-        .get(`${process.env.GOOGLE_OAUTH_API}/tokeninfo`, {
+      const profileResponse = await $axios
+      // const response = await $axios
+      //   .get(`${process.env.GOOGLE_OAUTH_API}/tokeninfo`, {
+      //     params: {
+      //       id_token: ID_TOKEN
+      //     }
+      //   })
+      // onResult(response)
+      .get('https://people.googleapis.com/v1/people/me', {
           params: {
-            id_token: ID_TOKEN
+            personFields: 'names,photos,emailAddresses',
+            key: API_KEY
+          },
+          headers: {
+            Authorization: `Bearer ${accessToken}`
           }
         })
-      onResult(response)
-      // console.log(response , 555555)
+        onResult(profileResponse.data)
     } catch (error) {
       console.error(error)
       router.replace('/')
